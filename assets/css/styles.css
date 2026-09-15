@@ -1,0 +1,256 @@
+/* ==========================================================================
+   Design tokens — Atividade IHC (Consulta e Envio de Atividade Acadêmica)
+   ========================================================================== */
+:root {
+  --color-bg: #f6f5f1;
+  --color-surface: #ffffff;
+  --color-ink: #1e1d1b;
+  --color-ink-muted: #5b584f;
+  --color-primary: #1f3a5f;
+  --color-primary-dark: #16283f;
+  --color-accent: #c97a2b;
+  --color-success: #1f5940;
+  --color-success-bg: #e8f1ec;
+  --color-pending: #7a3710;
+  --color-pending-bg: #fbeee3;
+  --color-late: #8a1c1c;
+  --color-late-bg: #fbe7e7;
+  --color-sent-late: #5c4a12;
+  --color-sent-late-bg: #f7f0d8;
+  --color-focus: #a8541a;
+  --color-border: #ddd8ce;
+
+  /* Sobrescreve variáveis do Bootstrap 5.3 para casar com a paleta acima */
+  --bs-primary: var(--color-primary);
+  --bs-primary-rgb: 31, 58, 95;
+  --bs-link-color: var(--color-primary);
+  --bs-link-hover-color: var(--color-primary-dark);
+  --bs-body-color: var(--color-ink);
+  --bs-body-bg: var(--color-bg);
+  --bs-border-color: var(--color-border);
+  --bs-focus-ring-color: rgba(201, 122, 43, 0.45);
+}
+
+/* Base tipográfica em 18px (112,5% do padrão do navegador). Usar porcentagem
+   em vez de px mantém o respeito ao tamanho de fonte configurado pelo usuário.
+   Como o Bootstrap mede tudo em rem, botões, campos e títulos escalam juntos.
+   Correção de legibilidade encontrada ao revisar o protótipo em uso. */
+html {
+  font-size: 112.5%;
+}
+
+body {
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+}
+
+h1, h2, h3, .brand {
+  font-family: "Fraunces", Georgia, serif;
+}
+
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-dark); }
+
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+}
+.btn-outline-primary {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+.btn-check:checked + .btn-outline-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+}
+
+/* Foco visível em todo elemento interativo — requisito de acessibilidade.
+   Dois tons (gap branco + laranja escuro) para passar 3:1 sobre qualquer fundo,
+   inclusive botões primários escuros. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible,
+.btn-check:focus-visible + .btn {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px #fff;
+}
+.form-control:focus {
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 0.25rem rgba(168, 84, 26, 0.3);
+}
+
+/* Link "pular para o conteúdo" — só aparece ao navegar por teclado */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-primary);
+  color: #fff;
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 4px 0;
+  z-index: 1000;
+  text-decoration: none;
+}
+.skip-link:focus {
+  left: 0;
+  top: 0;
+}
+
+/* Cabeçalho */
+.app-navbar {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+.app-navbar .brand {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--color-ink);
+  line-height: 1.1;
+}
+.app-navbar .brand small {
+  display: block;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.7rem;
+  color: var(--color-ink-muted);
+  font-weight: 400;
+}
+
+/* Lista de atividades — linhas divididas por borda, sem grid de cards genérico */
+.activity-row {
+  border-bottom: 1px solid var(--color-border);
+  padding: 1.1rem 0;
+}
+.activity-row:first-of-type {
+  border-top: 1px solid var(--color-border);
+}
+.activity-row .activity-title {
+  font-family: "Fraunces", serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-ink);
+}
+.activity-row .activity-title:hover {
+  color: var(--color-primary-dark);
+}
+.activity-row .activity-meta {
+  color: var(--color-ink-muted);
+  font-size: 1rem;
+}
+
+/* Selo de status — sempre cor + ícone + texto, nunca só cor */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.status-badge.is-pendente {
+  background-color: var(--color-pending-bg);
+  color: var(--color-pending);
+}
+.status-badge.is-atrasada {
+  background-color: var(--color-late-bg);
+  color: var(--color-late);
+}
+.status-badge.is-enviada {
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+}
+.status-badge.is-enviada-atraso {
+  background-color: var(--color-sent-late-bg);
+  color: var(--color-sent-late);
+}
+
+/* Texto relativo do prazo ("vence amanhã", "venceu há 3 dias") */
+.deadline-hint {
+  font-weight: 600;
+}
+.deadline-hint.is-proximo { color: var(--color-pending); }
+.deadline-hint.is-vencido { color: var(--color-late); }
+
+/* Painel de envio na tela de detalhe */
+.submit-panel {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  padding: 1.5rem;
+}
+
+/* Tela de confirmação */
+.confirmation-mark {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: var(--color-success-bg);
+  color: var(--color-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+}
+
+.field-hint {
+  color: var(--color-ink-muted);
+  font-size: 0.85rem;
+}
+
+/* Contas de demonstração na tela de login */
+.demo-accounts {
+  background-color: var(--color-surface);
+  border: 1px dashed var(--color-border);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+}
+.demo-accounts table { margin-bottom: 0; font-size: 0.9rem; }
+.demo-accounts td, .demo-accounts th { padding: 0.35rem 0.5rem; vertical-align: middle; }
+.demo-accounts code { color: var(--color-ink); background: var(--color-bg); padding: 0.1rem 0.35rem; border-radius: 3px; }
+
+/* Bloco de ajuda recolhível na tela de detalhe */
+.help-toggle {
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+.help-toggle[aria-expanded="true"] .fa-chevron-down { transform: rotate(180deg); }
+.help-toggle .fa-chevron-down { transition: transform 0.2s; font-size: 0.75rem; }
+.help-body {
+  border-left: 3px solid var(--color-border);
+  padding-left: 1rem;
+}
+
+/* Resumo da entrega na tela de confirmação */
+.receipt {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 6px;
+  text-align: left;
+}
+.receipt dt { color: var(--color-ink-muted); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; font-weight: 500; }
+.receipt dd { margin-bottom: 0.75rem; }
+.receipt dd:last-child { margin-bottom: 0; }
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  .spinner-border { animation: none; border-right-color: currentColor; }
+  .help-toggle .fa-chevron-down { transition: none; }
+  .fade, .collapse, .collapsing { transition: none !important; }
+}

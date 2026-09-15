@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhe da atividade — SENAI CIMATEC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="app-navbar">
+    <div class="container d-flex align-items-center justify-content-between py-3">
+      <span class="brand">Atividades <small>SENAI CIMATEC</small></span>
+      <div class="d-flex align-items-center gap-3">
+        <span id="nome-usuario" class="text-muted" style="font-size: 0.9rem"></span>
+        <button id="btn-sair" class="btn btn-outline-primary btn-sm">
+          <i class="fa-solid fa-arrow-right-from-bracket me-1" aria-hidden="true"></i>Sair
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="container py-4" style="max-width: 900px">
+    <a href="atividades.html" class="d-inline-block mb-3 text-decoration-none">
+      <i class="fa-solid fa-arrow-left me-1" aria-hidden="true"></i>Voltar para minhas atividades
+    </a>
+
+    <div id="atividade-nao-encontrada" class="alert alert-warning d-none" role="alert">
+      Atividade não encontrada. <a href="atividades.html">Voltar para a lista</a>.
+    </div>
+
+    <div id="atividade-conteudo" class="row g-4">
+      <div class="col-lg-7">
+        <div id="badge-status" class="mb-2"></div>
+        <h1 id="atividade-titulo" class="h3 mb-1"></h1>
+        <p id="atividade-meta" class="text-muted mb-1"></p>
+        <p id="atividade-prazo" class="mb-4"></p>
+
+        <h2 class="h6 text-uppercase text-muted">Enunciado</h2>
+        <p id="atividade-descricao"></p>
+
+        <h2 class="h6 text-uppercase text-muted mt-4">Formato da entrega</h2>
+        <p id="atividade-formato" class="mb-0"></p>
+      </div>
+
+      <div class="col-lg-5">
+        <div class="submit-panel">
+          <h2 class="h5 mb-3">Enviar entrega</h2>
+
+          <div id="entrega-existente" class="alert alert-success d-none" role="status">
+            <i class="fa-solid fa-circle-check me-1" aria-hidden="true"></i>
+            <span id="texto-entrega-existente"></span>
+          </div>
+
+          <div id="aviso-atraso" class="alert alert-warning d-none" role="status">
+            <i class="fa-solid fa-triangle-exclamation me-1" aria-hidden="true"></i>
+            <span id="texto-aviso-atraso"></span>
+          </div>
+
+          <form id="form-envio" novalidate>
+            <div class="mb-3">
+              <label for="arquivo" class="form-label">Arquivo da entrega</label>
+              <input
+                type="file"
+                class="form-control"
+                id="arquivo"
+                name="arquivo"
+                required
+                aria-describedby="arquivo-hint arquivo-erro"
+              />
+              <div id="arquivo-hint" class="field-hint mt-1"></div>
+              <div id="arquivo-erro" class="invalid-feedback">Selecione um arquivo antes de enviar.</div>
+            </div>
+
+            <div class="mb-3">
+              <label for="comentario" class="form-label">Comentário (opcional)</label>
+              <textarea
+                class="form-control"
+                id="comentario"
+                name="comentario"
+                rows="3"
+                maxlength="500"
+                aria-describedby="comentario-contador"
+              ></textarea>
+              <div id="comentario-contador" class="field-hint mt-1 text-end">0/500</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" id="btn-enviar">
+              <span id="icone-envio"><i class="fa-solid fa-paper-plane me-2" aria-hidden="true"></i></span>
+              <span
+                id="spinner-envio"
+                class="spinner-border spinner-border-sm me-2 d-none"
+                aria-hidden="true"
+              ></span>
+              <span id="texto-botao-envio">Enviar entrega</span>
+            </button>
+          </form>
+
+          <hr class="my-3" />
+
+          <button
+            class="btn btn-link btn-sm p-0 help-toggle"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#ajuda-entrega"
+            aria-expanded="false"
+            aria-controls="ajuda-entrega"
+          >
+            <i class="fa-solid fa-circle-question me-1" aria-hidden="true"></i>Como funciona a entrega
+            <i class="fa-solid fa-chevron-down ms-1" aria-hidden="true"></i>
+          </button>
+          <div class="collapse" id="ajuda-entrega">
+            <ul class="help-body field-hint mt-2 mb-0">
+              <li>Escolha um arquivo no formato aceito e clique em <strong>Enviar entrega</strong>.</li>
+              <li>Cada atividade aceita uma entrega. Se enviar de novo, a nova substitui a anterior e é a que vale.</li>
+              <li>Depois do prazo a entrega ainda é aceita, mas fica marcada como <strong>atrasada</strong>.</li>
+              <li>O comentário é opcional e chega ao professor junto com o arquivo.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div
+    class="modal fade"
+    id="modal-reenvio"
+    tabindex="-1"
+    aria-labelledby="modal-reenvio-titulo"
+    aria-describedby="modal-reenvio-texto"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title h5" id="modal-reenvio-titulo">Substituir entrega anterior?</h2>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+        <div class="modal-body">
+          <p id="modal-reenvio-texto" class="mb-0">
+            Você já enviou uma entrega para esta atividade. Deseja substituir a anterior?
+            <span id="modal-reenvio-atraso" class="d-block mt-2 fw-semibold"></span>
+          </p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btn-confirmar-reenvio">Substituir entrega</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/util.js" defer></script>
+  <script src="assets/js/storage.js" defer></script>
+  <script src="assets/js/atividade.js" defer></script>
+</body>
+</html>

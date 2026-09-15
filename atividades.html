@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Minhas atividades — SENAI CIMATEC</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="app-navbar">
+    <div class="container d-flex align-items-center justify-content-between py-3">
+      <span class="brand">Atividades <small>SENAI CIMATEC</small></span>
+      <div class="d-flex align-items-center gap-3">
+        <span id="nome-usuario" class="text-muted" style="font-size: 0.9rem"></span>
+        <button id="btn-sair" class="btn btn-outline-primary btn-sm">
+          <i class="fa-solid fa-arrow-right-from-bracket me-1" aria-hidden="true"></i>Sair
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="container py-4" style="max-width: 760px">
+    <h1 class="h3 mb-1">Minhas atividades</h1>
+    <p class="text-muted mb-4">Consulte o que está pendente e envie suas entregas.</p>
+
+    <div class="btn-group mb-4" role="group" aria-label="Filtrar atividades por status">
+      <input type="radio" class="btn-check" name="filtro" id="filtro-todas" value="todas" checked />
+      <label class="btn btn-outline-primary" for="filtro-todas">Todas</label>
+
+      <input type="radio" class="btn-check" name="filtro" id="filtro-pendentes" value="pendentes" />
+      <label class="btn btn-outline-primary" for="filtro-pendentes">Pendentes</label>
+
+      <input type="radio" class="btn-check" name="filtro" id="filtro-enviadas" value="enviadas" />
+      <label class="btn btn-outline-primary" for="filtro-enviadas">Enviadas</label>
+    </div>
+    <p class="field-hint mb-3">
+      "Pendentes" inclui as atrasadas; "Enviadas" inclui as enviadas com atraso.
+    </p>
+
+    <div id="anuncio-filtro" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
+    <div id="lista-atividades" role="list" aria-label="Lista de atividades"></div>
+
+    <p id="lista-vazia" class="text-muted text-center py-5 d-none">
+      Nenhuma atividade encontrada para esse filtro.
+    </p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/data.js" defer></script>
+  <script src="assets/js/util.js" defer></script>
+  <script src="assets/js/storage.js" defer></script>
+  <script src="assets/js/atividades.js" defer></script>
+</body>
+</html>
